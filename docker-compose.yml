@@ -19,7 +19,7 @@ x-n8n: &service-n8n
   image: n8nio/n8n:latest
   environment:
     - DB_TYPE=postgresdb
-    - DB_POSTGRESDB_HOST=db
+    - DB_POSTGRESDB_HOST=postgres
     - DB_POSTGRESDB_USER=postgres
     - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD}
     - DB_POSTGRESDB_DATABASE=postgres
@@ -75,7 +75,7 @@ services:
     entrypoint: /bin/sh -c "sleep 3; flowise start"
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/open-webui/open-webui:latest
     restart: unless-stopped
     container_name: open-webui
     expose:
@@ -307,7 +307,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: postgres
     volumes:
-      - langfuse_postgres_data:/var/lib/postgresql/data              
+      - langfuse_postgres_data:/var/lib/postgresql
 
   redis:
     container_name: redis
